@@ -1,0 +1,48 @@
+  google.charts.load('current', {'packages':['gantt']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function daysToMilliseconds(days) {
+        return days * 24 * 60 * 60 * 1000;
+      }
+
+
+    function daysToMilliseconds(days) {
+      return days * 24 * 60 * 60 * 1000;
+    }
+
+    function drawChart() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Task ID');
+      data.addColumn('string', 'Task Name');
+      data.addColumn('date', 'Start Date');
+      data.addColumn('date', 'End Date');
+      data.addColumn('number', 'Duration');
+      data.addColumn('number', 'Percent Complete');
+      data.addColumn('string', 'Dependencies');
+
+      data.addRows([
+      //  ['skill1', 'WBS', new Date(2021, 0, 10), new Date(2021, 0, 17), null,  100,  null],
+      //  ['skill2', 'CBA', new Date(2021, 0, 17),new Date(2021, 0, 26), null, 25, 'skill1'],
+      //  ['skill3', 'CPM', new Date(2021, 0, 26), new Date(2021, 1,2 ),null, 20, null],
+      //  ['skill4', 'AA', new Date(2021, 1, 2), new Date(2021, 1, 10),null, 0, 'skill2'],
+      //  ['test', 'exam1', new Date(2021, 1, 22), new Date(2021, 1, 23),null, 100, 'skill1, skill2, skill3, skill4'],
+      
+      
+      	['initiate','Start', new Date(2021, 0, 10), new Date(2021, 0, 11), null, 100, null],
+        ['design', 'Plan', new Date(2021, 0, 11), new Date(2021, 0, 12), null, 100, 'initiate'],
+        ['code', 'Program', new Date(2021, 0, 12), new Date(2021, 0, 13), null, 100, 'design'],
+        ['test', 'Troubleshoot', new Date(2021, 0, 13), new Date(2021, 0, 14), null, 100, 'code'],
+        ['deploy', 'Review', new Date(2021, 0, 14), new Date(2021, 0, 15), null, 100, 'test'],
+        ['evaluate', 'Submit', new Date(2021, 0, 15), new Date(2021, 0, 16), null, 100, 'deploy'],
+        ['close', 'Complete', new Date(2021, 0, 16), new Date(2021, 0, 17), null, 100, 'evaluate']
+      
+			]);	
+      
+      var options = {
+        height: 300
+      };
+
+      var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
